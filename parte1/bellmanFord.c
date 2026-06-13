@@ -18,7 +18,7 @@ int* menorCaminho(Grafo* grafo, int inicio, int destinoFinal, int* pesoTotal, in
     // A distância do início para ele mesmo é 0
     dist[inicio] = 0;
 
-    // 3. Loop Principal do Dijkstra
+    // 3. Loop principal
     // Vamos iterar no máximo MAX-1 vezes
     for (int i = 0; i <= tamanhoGrafo - 1; i++) {
         

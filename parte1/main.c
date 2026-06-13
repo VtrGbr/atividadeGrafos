@@ -3,75 +3,53 @@
 int main(){
     int numVertices, numArestas;
     int inicio, final, pesoTotal = 0, tamanhoCaminho = 0;
-    int vertice1, vertice2, peso;
-    char nomeCidadeA[50], nomeCidadeB[50];   
     
-    printf("Quantidade de cidades (vertices): ");
-    scanf("%d", &numVertices);
+    // 1. Lê a primeira linha (número de vértices e arestas)
+    if (scanf("%d %d", &numVertices, &numArestas) != 2) {
+        printf("Erro ao ler vértices e arestas.\n");
+        return 1;
+    }
 
-    // Cria o grafo com o tamanho exato
+    // 2. Lê a segunda linha (roteador de origem S e destino T)
+    if (scanf("%d %d", &inicio, &final) != 2) {
+        printf("Erro ao ler origem e destino.\n");
+        return 1;
+    }
+
+    // Cria o grafo
     Grafo* grafo = criarGrafo(numVertices);
-    
 
-    lerCidade(citys, numVertices);
-
-    //Perguntar quantas estradas existem separadamente
-    scanf("%d", &numArestas);
-
-    for( int i = 0; i < numArestas; i++){
-        printf("\n--- Conexão %d ---\n", i+1);
-        printf("Cidade de Origem: ");
-        scanf(" %[^\n]", nomeCidadeA);
-        
-        printf("Cidade de Destino: ");
-        scanf(" %[^\n]", nomeCidadeB);
-        
-        printf("Distância (Peso em Km): ");
-        scanf("%d", &peso);
-
-        vertice1 = verticeCidade(citys, nomeCidadeA, numVertices);
-        vertice2 = verticeCidade(citys, nomeCidadeB, numVertices);
-
-        if( vertice1 == -1 || vertice2 == -1){
-            printf("Erro: Uma das cidades não foi encontrada. Tente novamente.\n");
-            i--; // Decrementa para repetir a iteração
-        } else {
-            adicionarAresta(grafo, vertice1, vertice2, peso, 0);
+    // 3. Lê as arestas dinamicamente
+    for(int i = 0; i < numArestas; i++){
+        int u, v, custo;
+        if (scanf("%d %d %d", &u, &v, &custo) == 3) {
+            // A parte 1 pede um GRAFO DIRECIONADO, logo enviamos '1' no final.
+            adicionarAresta(grafo, u, v, custo, 1);
         }
     }
 
-    int *caminho;
+    // 4. Executa o algoritmo de Bellman-Ford
+    int *caminho = menorCaminho(grafo, inicio, final, &pesoTotal, &tamanhoCaminho);
 
-    // CORREÇÃO 2: Ler nomes em vez de índices numéricos
-    printf("\n--- Calcular Rota ---\n");
-    printf("Digite o nome da cidade de INICIO: ");
-    scanf(" %[^\n]", nomeCidadeA);
+    // 5. Saída no formato EXATO exigido pela atividade
+    printf("ALGORITMO: Bellman-Ford\n");
+    printf("JUSTIFICATIVA: O grafo possui enlaces com SLA que geram custos negativos. O algoritmo de Dijkstra falha com pesos negativos, por isso o Bellman-Ford eh o aplicavel e mais adequado.\n");
     
-    printf("Digite o nome da cidade de DESTINO: ");
-    scanf(" %[^\n]", nomeCidadeB);
-
-    inicio = verticeCidade(citys, nomeCidadeA, numVertices);
-    final = verticeCidade(citys, nomeCidadeB, numVertices);
-
-    if (inicio == -1 || final == -1) {
-        printf("Erro: Cidades de início ou fim inválidas.\n");
+    if (caminho != NULL) {
+        printf("ROTA:");
+        for (int i = 0; i < tamanhoCaminho; i++) {
+            printf(" %d", caminho[i]);
+        }
+        printf("\n");
+        printf("CUSTO: %d\n", pesoTotal);
+        free(caminho);
     } else {
-        caminho = menorCaminho(grafo, inicio, final, &pesoTotal, &tamanhoCaminho);
-
-        if (caminho != NULL) {
-            printf("\n=== Rota Otimizada ===\n");
-            
-            for (int i = 0; i < tamanhoCaminho; i++) {
-                int idVertice = caminho[i];
-                
-                printf("%s (Pop: %d)", citys[idVertice].nome, citys[idVertice].populacao);
-                
-                if (i < tamanhoCaminho - 1) printf(" -> ");
-            }
-            printf("\n\nDistância total: %d km\n", pesoTotal);
-            free(caminho);
+        if (pesoTotal == INT_MIN) {
+            printf("ROTA: Ciclo negativo detectado.\n");
+            printf("CUSTO: Indefinido\n");
         } else {
-            printf("\nNão existe caminho possível entre %s e %s.\n", nomeCidadeA, nomeCidadeB);
+            printf("ROTA: Caminho inexistente\n");
+            printf("CUSTO: Infinito\n");
         }
     }
 
