@@ -75,7 +75,7 @@ O programa foi desenvolvido em Python.
 Para executar, utilize o comando:
 
 ```bash
-python parte2.py <arquivo_entrada> <arquivo_saida>
+python3 parte2.py <arquivo_entrada> <arquivo_saida>
 ```
 
 ### Exemplos
@@ -83,13 +83,13 @@ python parte2.py <arquivo_entrada> <arquivo_saida>
 Grafo pequeno:
 
 ```bash
-python parte2.py grafo_wifi_p.txt saida_parte2_p.txt
+python3 parte2.py grafo_wifi_p.txt saida_parte2_p.txt
 ```
 
 Grafo médio:
 
 ```bash
-python parte2.py grafo_wifi_m.txt saida_parte2_m.txt
+python3 parte2.py grafo_wifi_m.txt saida_parte2_m.txt
 ```
 
 ## Formato da entrada
@@ -121,3 +121,18 @@ onde:
 * `NUM_CORES` representa a quantidade mínima de cores utilizadas;
 * `COLORACAO` informa a cor atribuída a cada vértice;
 * as cores são representadas por números inteiros iniciando em 1.
+
+
+
+## Observações:
+
+1. A equipe é composta pelos integrantes :
+    - José Cristovão
+    - Vítor Gabriel
+O aluno Vítor Gabriel conversou com o professor perguntando se o trabalho pode ser em dupla, e o professor permitiu.
+
+2. O código da parte1 foi reaproveitado do projeto que o aluno Vítor Gabriel fez nas férias, o link do repositório é
+[Estudando Grafos](https://github.com/VtrGbr/EstudandoGrafos.git)
+
+
+
