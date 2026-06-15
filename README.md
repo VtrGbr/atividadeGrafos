@@ -129,7 +129,7 @@ onde:
 1. A equipe é composta pelos integrantes :
     - José Cristovão
     - Vítor Gabriel
-O aluno Vítor Gabriel conversou com o professor perguntando se o trabalho pode ser em dupla, e o professor permitiu.
+- O aluno Vítor Gabriel conversou com o professor perguntando se o trabalho pode ser em dupla, e o professor permitiu.
 
 2. O código da parte1 foi reaproveitado do projeto que o aluno Vítor Gabriel fez nas férias, o link do repositório é
 [Estudando Grafos](https://github.com/VtrGbr/EstudandoGrafos.git)
