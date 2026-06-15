@@ -53,3 +53,71 @@ Justificativa do Algoritmo: Bellman-Ford vs. Dijkstra
 2. Relaxamento Exaustivo: O Bellman-Ford contorna esse problema relaxando todas as arestas V−1 vezes (onde V é o número de vértices). Isso garante que o custo mínimo seja propagado corretamente por toda a rede, independentemente de enlaces negativos.
 
 3. Detecção de Anomalias (Ciclos Negativos): Em redes, uma configuração errônea pode criar um loop onde o custo continua diminuindo infinitamente. O Bellman-Ford possui uma etapa final nativa que percorre as arestas mais uma vez para detectar a presença de ciclos negativos. Caso exista um, nosso programa o identifica e aborta o roteamento de forma segura, informando "Ciclo negativo detectado".
+
+# Parte 2 – Alocação de Canais Wi-Fi
+
+## Descrição
+
+Esta parte da atividade resolve o problema de coloração de grafos aplicado à alocação de canais Wi-Fi. Cada vértice representa um ponto de acesso (AP) e cada aresta indica interferência entre dois APs. Assim, vértices adjacentes não podem receber a mesma cor (canal).
+
+O objetivo é encontrar uma coloração válida utilizando o menor número possível de cores.
+
+## Algoritmo utilizado
+
+Foi utilizado o algoritmo **Backtracking**.
+
+O algoritmo testa inicialmente se é possível colorir o grafo utilizando apenas uma cor. Caso não seja possível, tenta com duas cores, depois três, e assim sucessivamente até encontrar uma solução válida. Dessa forma, garante que a coloração encontrada utiliza o menor número de cores possível.
+
+## Compilação e execução
+
+O programa foi desenvolvido em Python.
+
+Para executar, utilize o comando:
+
+```bash
+python parte2.py <arquivo_entrada> <arquivo_saida>
+```
+
+### Exemplos
+
+Grafo pequeno:
+
+```bash
+python parte2.py grafo_wifi_p.txt saida_parte2_p.txt
+```
+
+Grafo médio:
+
+```bash
+python parte2.py grafo_wifi_m.txt saida_parte2_m.txt
+```
+
+## Formato da entrada
+
+O arquivo de entrada deve seguir o formato:
+
+```
+<num_vertices> <num_arestas>
+<vertice_u> <vertice_v>
+<vertice_u> <vertice_v>
+...
+```
+
+Cada linha após a primeira representa uma aresta entre dois vértices do grafo.
+
+## Formato da saída
+
+O programa gera um arquivo de saída contendo:
+
+```
+ALGORITMO: Backtracking
+JUSTIFICATIVA: ...
+NUM_CORES: <k>
+COLORACAO: <vertice>=<cor> ...
+```
+
+onde:
+
+* `NUM_CORES` representa a quantidade mínima de cores utilizadas;
+* `COLORACAO` informa a cor atribuída a cada vértice;
+* as cores são representadas por números inteiros iniciando em 1.
