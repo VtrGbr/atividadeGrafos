@@ -1,0 +1,5 @@
+ALGORITMO: DSatur com Backtracking
+JUSTIFICATIVA: O algoritmo escolhe primeiro os vertices mais restritos e testa as cores com backtracking.
+Assim, encontra uma coloracao valida usando o menor numero possivel de cores.
+NUM_CORES: 3
+COLORACAO: 0=1 1=2 2=3 3=1 4=2
